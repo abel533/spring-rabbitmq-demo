@@ -12,6 +12,13 @@
         <jackson-databind>2.8.11.1</jackson-databind>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.amqp</groupId>

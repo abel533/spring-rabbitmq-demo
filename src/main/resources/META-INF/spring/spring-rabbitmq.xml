@@ -3,24 +3,15 @@
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:rabbit="http://www.springframework.org/schema/rabbit"
        xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/rabbit
        http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
        http://www.springframework.org/schema/task
-       http://www.springframework.org/schema/task/spring-task.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/task/spring-task.xsd">
 
     <!--启用注解监听消息-->
     <rabbit:annotation-driven/>
-
-    <!--TODO 临时用-->
-    <context:property-placeholder location="classpath:META-INF/spring/application.properties"/>
-
-    <!--TODO 临时用-->
-    <context:component-scan base-package="rabbitmq.listener"/>
 
     <!--连接工厂配置-->
     <rabbit:connection-factory id="rabbitConnectionFactory"
@@ -36,7 +27,8 @@
     </bean>
 
     <!--消息模板-->
-    <rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory" message-converter="amqpMessageConverter"/>
+    <rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"
+                     message-converter="amqpMessageConverter"/>
 
     <!--消息转换，生产者和消费者都需要 -->
     <bean id="amqpMessageConverter" class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter"/>
@@ -45,7 +37,8 @@
     <rabbit:admin id="amqpAdmin" connection-factory="rabbitConnectionFactory"/>
 
     <!--消息监听容器，配合注解监听消息-->
-    <bean id="rabbitListenerContainerFactory" class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
+    <bean id="rabbitListenerContainerFactory"
+          class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
         <property name="connectionFactory" ref="rabbitConnectionFactory"/>
         <!--并发消费者数量-->
         <property name="concurrentConsumers" value="${rabbitmq.concurrentConsumers:3}"/>
