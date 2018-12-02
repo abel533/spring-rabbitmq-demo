@@ -10,11 +10,13 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--加载属性配置文件-->
     <context:property-placeholder location="classpath:META-INF/spring/application.properties"/>
 
+    <!--扫描包-->
     <context:component-scan base-package="rabbitmq"/>
 
-    <!-- Producter 中的任务调度使用 -->
+    <!--Producter 中的任务调度使用-->
     <task:scheduler id="taskScheduler"/>
     <task:annotation-driven scheduler="taskScheduler"/>
 

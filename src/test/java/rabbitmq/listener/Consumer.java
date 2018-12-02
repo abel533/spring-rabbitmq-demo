@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
-public class ConsumerListener {
-    private static final Logger logger = LoggerFactory.getLogger(ConsumerListener.class);
+public class Consumer {
+    private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     /**
      * 接收对象的例子
